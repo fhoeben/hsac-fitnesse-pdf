@@ -13,6 +13,9 @@ import java.io.IOException;
 public class PdfFixture extends SlimFixture {
     private final PDFTextStripper pdfStripper;
 
+    /**
+     * Creates new.
+     */
     public PdfFixture() {
         try {
             pdfStripper = createPdfTextStripper();
