@@ -15,9 +15,7 @@ public class PdfFixture extends SlimFixture {
 
     public PdfFixture() {
         try {
-            pdfStripper = new PDFTextStripper();
-            pdfStripper.setLineSeparator("\n");
-            pdfStripper.setPageEnd("\n");
+            pdfStripper = createPdfTextStripper();
         } catch (IOException e) {
             throw new SlimFixtureException("Unable to create PDF toolkit", e);
         }
@@ -46,11 +44,26 @@ public class PdfFixture extends SlimFixture {
             StringBuilderWriter writer = new StringBuilderWriter(2048);
             pdfStripper.writeText(doc, writer);
             String text = writer.toString();
-            // spaces at end of line are not interesting
-            text = text.replaceAll(" +\\n", "\n");
+            text = postProcessText(text);
             return text;
         } catch (IOException e) {
             throw new SlimFixtureException("Unable to read PDF: " + file, e);
         }
+    }
+
+    protected String postProcessText(String text) {
+        // spaces at end of line are not interesting
+        return text.replaceAll(" +\\n", "\n");
+    }
+
+    protected PDFTextStripper createPdfTextStripper() throws IOException {
+        PDFTextStripper pdfStripper = new PDFTextStripper();
+        pdfStripper.setLineSeparator("\n");
+        pdfStripper.setPageEnd("\n");
+        return pdfStripper;
+    }
+
+    public PDFTextStripper getPdfStripper() {
+        return pdfStripper;
     }
 }
