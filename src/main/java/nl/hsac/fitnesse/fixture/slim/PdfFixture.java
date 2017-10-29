@@ -13,15 +13,12 @@ import java.io.IOException;
 public class PdfFixture extends SlimFixture {
     private final PDFTextStripper pdfStripper;
 
-    /**
-     * Creates new.
-     */
     public PdfFixture() {
-        try {
-            pdfStripper = createPdfTextStripper();
-        } catch (IOException e) {
-            throw new SlimFixtureException("Unable to create PDF toolkit", e);
-        }
+        this(createPdfTextStripper());
+    }
+
+    public PdfFixture(PDFTextStripper pdfTextStripper) {
+        pdfStripper = pdfTextStripper;
     }
 
     /**
@@ -59,11 +56,15 @@ public class PdfFixture extends SlimFixture {
         return text.replaceAll(" +\\n", "\n");
     }
 
-    protected PDFTextStripper createPdfTextStripper() throws IOException {
-        PDFTextStripper pdfStripper = new PDFTextStripper();
-        pdfStripper.setLineSeparator("\n");
-        pdfStripper.setPageEnd("\n");
-        return pdfStripper;
+    public static PDFTextStripper createPdfTextStripper() {
+        try {
+            PDFTextStripper pdfStripper = new PDFTextStripper();
+            pdfStripper.setLineSeparator("\n");
+            pdfStripper.setPageEnd("\n");
+            return pdfStripper;
+        } catch (IOException e) {
+            throw new SlimFixtureException("Unable to create PDF toolkit", e);
+        }
     }
 
     public PDFTextStripper getPdfStripper() {
