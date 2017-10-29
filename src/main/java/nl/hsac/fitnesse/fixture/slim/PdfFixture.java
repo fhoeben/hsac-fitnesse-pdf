@@ -30,7 +30,7 @@ public class PdfFixture extends SlimFixture {
      */
     public String pdfTextFormatted(String pdfFile) {
         String text = pdfText(pdfFile);
-        return "<pre>" + text + "</pre>";
+        return getEnvironment().getHtml(text);
     }
 
     /**

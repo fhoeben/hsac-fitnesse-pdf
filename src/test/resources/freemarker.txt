@@ -1,0 +1,20 @@
+<pre>File - /Users/fried/dev/hsac-fitnesse-fixtures/src/main/resources/templates/samplePost.ftl.xml
+Page 1 of 1
+&lt;s11:Envelope xmlns:s11=&quot;http://schemas.xmlsoap.org/soap/
+envelope/&quot;&gt;
+1
+&lt;s11:Body&gt;2
+&lt;ns1:GetWeather xmlns:ns1=&quot;http://www.webserviceX.
+NET&quot;&gt;
+3
+&lt;#if cityName??&gt;4
+&lt;ns1:CityName&gt;${cityName}&lt;/ns1:CityName&gt;5
+    &lt;/#if&gt;6
+&lt;ns1:CountryName&gt;${countryName}&lt;/ns1:
+CountryName&gt;
+7
+&lt;/ns1:GetWeather&gt;8
+&lt;/s11:Body&gt;9
+&lt;/s11:Envelope&gt;10
+11
+</pre>

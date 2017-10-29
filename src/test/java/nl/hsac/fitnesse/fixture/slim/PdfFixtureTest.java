@@ -9,16 +9,33 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PdfFixtureTest {
+    private final PdfFixture pdfFixture = new PdfFixture();
 
     @Test
     public void canGetText() {
-        PdfFixture pdfFixture = new PdfFixture();
-        File f = new File("src/test/resources/pdf-sample.pdf");
-        assertTrue(f.exists());
+        String doc = "pdf-sample";
+        String file = getInputPdf(doc);
+        String expectedText = FileUtil.loadFile(doc + ".txt");
 
-        String text = pdfFixture.pdfText(f.getAbsolutePath());
+        String text = pdfFixture.pdfText(file);
 
-        String expectedText = FileUtil.loadFile("pdf-sample.txt");
         assertEquals(expectedText, text);
+    }
+
+    @Test
+    public void canGetTextFormatted() {
+        String doc = "freemarker";
+        String file = getInputPdf(doc);
+        String expectedText = FileUtil.loadFile(doc + ".txt");
+
+        String text = pdfFixture.pdfTextFormatted(file);
+
+        assertEquals(expectedText, text);
+    }
+
+    private String getInputPdf(String doc) {
+        File f = new File("src/test/resources/" + doc + ".pdf");
+        assertTrue(f.exists());
+        return f.getAbsolutePath();
     }
 }
