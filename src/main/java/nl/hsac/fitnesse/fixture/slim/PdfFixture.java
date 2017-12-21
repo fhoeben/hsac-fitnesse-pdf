@@ -45,14 +45,38 @@ public class PdfFixture extends SlimFixture {
      * @return text in PDF.
      */
     public String pdfText(String pdfFile) {
+        return pdfTextFromPagesTo(pdfFile, 1, Integer.MAX_VALUE);
+    }
+
+    /**
+     * @param pdfFile pdf to get text from.
+     * @param startPage page number to start at (1 based).
+     * @param endPage last page to extract text from (inclusive).
+     * @return text in PDF (HTML preformatted).
+     */
+    public String pdfTextFormattedFromPagesTo(String pdfFile, int startPage, int endPage) {
+        String text = pdfTextFromPagesTo(pdfFile, startPage, endPage);
+        return getEnvironment().getHtml(text);
+    }
+
+    /**
+     * @param pdfFile pdf to get text from.
+     * @param startPage page number to start at (1 based).
+     * @param endPage last page to extract text from (inclusive).
+     * @return text in PDF.
+     */
+    public String pdfTextFromPagesTo(String pdfFile, int startPage, int endPage) {
         String file = getFilePathFromWikiUrl(pdfFile);
+        PDFTextStripper stripper = getPdfStripper();
+        stripper.setStartPage(startPage);
+        stripper.setEndPage(endPage);
         return getPdfText(file);
     }
 
     protected String getPdfText(String file) {
         return handleDoc(file, doc -> {
             StringBuilderWriter writer = new StringBuilderWriter(2048);
-            pdfStripper.writeText(doc, writer);
+            getPdfStripper().writeText(doc, writer);
             String text = writer.toString();
             text = postProcessText(text);
             return text;

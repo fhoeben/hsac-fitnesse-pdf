@@ -13,12 +13,12 @@ public class PdfFixtureTest {
 
     @Test
     public void canGetNoOfPages() {
-        String doc = "pdf-sample";
+        String doc = "latex-sample";
         String file = getInputPdf(doc);
 
         int pageCount = pdfFixture.numberOfPagesIn(file);
 
-        assertEquals(1, pageCount);
+        assertEquals(10, pageCount);
     }
 
     @Test
@@ -28,6 +28,17 @@ public class PdfFixtureTest {
         String expectedText = FileUtil.loadFile(doc + ".txt");
 
         String text = pdfFixture.pdfText(file);
+
+        assertEquals(expectedText, text);
+    }
+
+    @Test
+    public void canGetTextFewPages() {
+        String doc = "latex-sample";
+        String file = getInputPdf(doc);
+        String expectedText = FileUtil.loadFile(doc + "-3-6.txt");
+
+        String text = pdfFixture.pdfTextFormattedFromPagesTo(file, 3, 6);
 
         assertEquals(expectedText, text);
     }
