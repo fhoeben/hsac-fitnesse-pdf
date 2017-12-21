@@ -9,11 +9,15 @@ import org.apache.pdfbox.util.DateConverter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Helper to deal with PDDocumentInformation objects.
  */
 public class PDDocumentInformationHelper {
+    private String datePattern = "yyyy-MM-dd HH:mm";
+    private TimeZone timeZone = TimeZone.getDefault();
+
     public Map<String, Object> convertToMap(PDDocumentInformation documentInformation) {
         return documentInformation.getCOSObject()
                 .entrySet().stream()
@@ -47,7 +51,24 @@ public class PDDocumentInformationHelper {
     }
 
     protected Object formatCalender(Calendar calendar) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat df = new SimpleDateFormat(getDatePattern());
+        df.setTimeZone(getTimeZone());
         return df.format(calendar.getTime());
+    }
+
+    public String getDatePattern() {
+        return datePattern;
+    }
+
+    public void setDatePattern(String datePattern) {
+        this.datePattern = datePattern;
+    }
+
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = TimeZone.getTimeZone(timeZone);
     }
 }

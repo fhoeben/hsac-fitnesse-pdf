@@ -28,9 +28,10 @@ public class PdfFixtureTest {
         String doc = "latex-sample";
         String file = getInputPdf(doc);
 
+        pdfFixture.getDocumentInformationHelper().setTimeZone("UTC");
         Map<String, Object> docInfo = pdfFixture.pdfDocumentInformation(file);
 
-        assertEquals("{Author=, Title=, Subject=, Creator=TeX, Producer=pdfTeX, Keywords=, CreationDate=1999-02-20 22:20}",
+        assertEquals("{Author=, Title=, Subject=, Creator=TeX, Producer=pdfTeX, Keywords=, CreationDate=1999-02-20 21:20}",
                 docInfo.toString());
         assertEquals(docInfo.getClass(), LinkedHashMap.class);
     }
