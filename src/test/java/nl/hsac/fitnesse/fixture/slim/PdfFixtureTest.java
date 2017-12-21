@@ -12,6 +12,16 @@ public class PdfFixtureTest {
     private final PdfFixture pdfFixture = new PdfFixture();
 
     @Test
+    public void canGetNoOfPages() {
+        String doc = "pdf-sample";
+        String file = getInputPdf(doc);
+
+        int pageCount = pdfFixture.numberOfPagesIn(file);
+
+        assertEquals(1, pageCount);
+    }
+
+    @Test
     public void canGetText() {
         String doc = "pdf-sample";
         String file = getInputPdf(doc);

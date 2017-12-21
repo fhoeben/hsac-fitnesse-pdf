@@ -1,5 +1,6 @@
 package nl.hsac.fitnesse.fixture.slim;
 
+import nl.hsac.fitnesse.fixture.util.ThrowingFunction;
 import org.apache.commons.io.output.StringBuilderWriter;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -22,6 +23,15 @@ public class PdfFixture extends SlimFixture {
     }
 
     /**
+     * @param pdfFile pdf to number of pages from.
+     * @return number of pages in file.
+     */
+    public int numberOfPagesIn(String pdfFile) {
+        String file = getFilePathFromWikiUrl(pdfFile);
+        return handleDoc(file, doc -> doc.getNumberOfPages());
+    }
+
+    /**
      * @param pdfFile pdf to get text from.
      * @return text in PDF (HTML preformatted).
      */
@@ -32,7 +42,7 @@ public class PdfFixture extends SlimFixture {
 
     /**
      * @param pdfFile pdf to get text from.
-     * @return text in PDF (HTML preformatted).
+     * @return text in PDF.
      */
     public String pdfText(String pdfFile) {
         String file = getFilePathFromWikiUrl(pdfFile);
@@ -40,12 +50,18 @@ public class PdfFixture extends SlimFixture {
     }
 
     protected String getPdfText(String file) {
-        try (PDDocument doc = PDDocument.load(new File(file))) {
+        return handleDoc(file, doc -> {
             StringBuilderWriter writer = new StringBuilderWriter(2048);
             pdfStripper.writeText(doc, writer);
             String text = writer.toString();
             text = postProcessText(text);
             return text;
+        });
+    }
+
+    protected <T> T handleDoc(String file, ThrowingFunction<PDDocument, T, IOException> handler) {
+        try (PDDocument doc = PDDocument.load(new File(file))) {
+            return handler.apply(doc);
         } catch (IOException e) {
             throw new SlimFixtureException("Unable to read PDF: " + file, e);
         }
