@@ -4,6 +4,8 @@ import nl.hsac.fitnesse.fixture.util.FileUtil;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,6 +21,18 @@ public class PdfFixtureTest {
         int pageCount = pdfFixture.numberOfPagesIn(file);
 
         assertEquals(10, pageCount);
+    }
+
+    @Test
+    public void canGetDocumentInformation() {
+        String doc = "latex-sample";
+        String file = getInputPdf(doc);
+
+        Map<String, Object> docInfo = pdfFixture.pdfDocumentInformation(file);
+
+        assertEquals("{Author=, Title=, Subject=, Creator=TeX, Producer=pdfTeX, Keywords=, CreationDate=1999-02-20 22:20}",
+                docInfo.toString());
+        assertEquals(docInfo.getClass(), LinkedHashMap.class);
     }
 
     @Test

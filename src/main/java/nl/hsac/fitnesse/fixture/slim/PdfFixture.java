@@ -1,5 +1,6 @@
 package nl.hsac.fitnesse.fixture.slim;
 
+import nl.hsac.fitnesse.fixture.util.PDDocumentInformationHelper;
 import nl.hsac.fitnesse.fixture.util.ThrowingFunction;
 import org.apache.commons.io.output.StringBuilderWriter;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -7,19 +8,22 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Fixture to work with PDFs.
  */
 public class PdfFixture extends SlimFixture {
     private final PDFTextStripper pdfStripper;
+    private final PDDocumentInformationHelper documentInformationHelper;
 
     public PdfFixture() {
-        this(createPdfTextStripper());
+        this(createPdfTextStripper(), new PDDocumentInformationHelper());
     }
 
-    public PdfFixture(PDFTextStripper pdfTextStripper) {
+    public PdfFixture(PDFTextStripper pdfTextStripper, PDDocumentInformationHelper helper) {
         pdfStripper = pdfTextStripper;
+        documentInformationHelper = helper;
     }
 
     /**
@@ -29,6 +33,15 @@ public class PdfFixture extends SlimFixture {
     public int numberOfPagesIn(String pdfFile) {
         String file = getFilePathFromWikiUrl(pdfFile);
         return handleDoc(file, doc -> doc.getNumberOfPages());
+    }
+
+    /**
+     * @param pdfFile pdf to number of pages from.
+     * @return number of pages in file.
+     */
+    public Map<String, Object> pdfDocumentInformation(String pdfFile) {
+        String file = getFilePathFromWikiUrl(pdfFile);
+        return handleDoc(file, doc -> documentInformationHelper.convertToMap(doc.getDocumentInformation()));
     }
 
     /**
@@ -109,5 +122,9 @@ public class PdfFixture extends SlimFixture {
 
     public PDFTextStripper getPdfStripper() {
         return pdfStripper;
+    }
+
+    public PDDocumentInformationHelper getDocumentInformationHelper() {
+        return documentInformationHelper;
     }
 }
