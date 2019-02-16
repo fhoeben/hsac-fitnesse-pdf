@@ -40,8 +40,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <fitnesse.version>20180127</fitnesse.version>
-        <hsac.fixtures.version>3.28.2</hsac.fixtures.version>
+        <fitnesse.version>20190202</fitnesse.version>
+        <hsac.fixtures.version>4.0.1</hsac.fixtures.version>
     </properties>
 
     <dependencies>
@@ -67,6 +67,13 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
