@@ -44,7 +44,7 @@ public class PdfFixtureTest {
 
         String text = pdfFixture.pdfText(file);
 
-        assertEquals(expectedText, text);
+        assertEquals(expectedText, text.replace("•  ", "• "));
     }
 
     @Test
