@@ -44,6 +44,7 @@ public class PdfFixtureTest {
 
         String text = pdfFixture.pdfText(file);
 
+        // replace is needed on travis, where fonts are not available and therefore extra space is added after bullet
         assertEquals(expectedText, text.replace("•  ", "• "));
     }
 
