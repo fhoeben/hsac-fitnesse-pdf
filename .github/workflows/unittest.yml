@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - '*'
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   maven-test:
@@ -18,8 +21,10 @@ jobs:
           java-version: '11'
           distribution: 'zulu'
           cache: maven
+
       - name: Unit Test with Maven
-        run: mvn test
+        run: mvn --batch-mode test
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
