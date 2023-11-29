@@ -3,6 +3,7 @@ package nl.hsac.fitnesse.fixture.slim;
 import nl.hsac.fitnesse.fixture.util.PDDocumentInformationHelper;
 import nl.hsac.fitnesse.fixture.util.ThrowingFunction;
 import org.apache.commons.io.output.StringBuilderWriter;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
@@ -32,12 +33,12 @@ public class PdfFixture extends SlimFixture {
      */
     public int numberOfPagesIn(String pdfFile) {
         String file = getFilePathFromWikiUrl(pdfFile);
-        return handleDoc(file, doc -> doc.getNumberOfPages());
+        return handleDoc(file, PDDocument::getNumberOfPages);
     }
 
     /**
      * @param pdfFile pdf to number of pages from.
-     * @return number of pages in file.
+     * @return map of key value pairs containing document information of file.
      */
     public Map<String, Object> pdfDocumentInformation(String pdfFile) {
         String file = getFilePathFromWikiUrl(pdfFile);
@@ -97,7 +98,7 @@ public class PdfFixture extends SlimFixture {
     }
 
     protected <T> T handleDoc(String file, ThrowingFunction<PDDocument, T, IOException> handler) {
-        try (PDDocument doc = PDDocument.load(new File(file))) {
+        try (PDDocument doc = Loader.loadPDF(new File(file))) {
             return handler.apply(doc);
         } catch (IOException e) {
             throw new SlimFixtureException("Unable to read PDF: " + file, e);
@@ -110,14 +111,10 @@ public class PdfFixture extends SlimFixture {
     }
 
     public static PDFTextStripper createPdfTextStripper() {
-        try {
             PDFTextStripper pdfStripper = new PDFTextStripper();
             pdfStripper.setLineSeparator("\n");
             pdfStripper.setPageEnd("\n");
             return pdfStripper;
-        } catch (IOException e) {
-            throw new SlimFixtureException("Unable to create PDF toolkit", e);
-        }
     }
 
     public PDFTextStripper getPdfStripper() {

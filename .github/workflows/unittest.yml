@@ -1,0 +1,28 @@
+name: unit test
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  maven-test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Install Java and Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'zulu'
+          cache: maven
+      - name: Unit Test with Maven
+        run: mvn test
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            **/TEST-*.xml
