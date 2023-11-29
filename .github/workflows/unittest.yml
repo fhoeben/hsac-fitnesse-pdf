@@ -23,7 +23,7 @@ jobs:
           cache: maven
 
       - name: Unit Test with Maven
-        run: mvn --batch-mode test
+        run: mvn --batch-mode package
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
