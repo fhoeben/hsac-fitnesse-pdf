@@ -25,7 +25,7 @@ jobs:
           cache: 'maven'
 
       - name: Unsnapshot version
-        run:  mvn versions:set -DremoveSnapshot
+        run:  mvn --batch-mode versions:set -DremoveSnapshot
 
       - id: get-version
         run: |
@@ -52,7 +52,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
       - name: Publish to Apache Maven Central
-        run: mvn clean deploy -P release
+        run: mvn --batch-mode clean deploy -P release
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_PASSWORD }}
@@ -136,7 +136,7 @@ jobs:
 
       - name: Update version
         run: |
-          mvn -B release:update-versions -DautoVersionSubmodules=true
+          mvn --batch-mode release:update-versions -DautoVersionSubmodules=true
 
       - name: Push pom.xml with next -SNAPSHOT version to repository
         run: |
