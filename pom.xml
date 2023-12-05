@@ -39,7 +39,7 @@
         <project.build.outputTimestamp>2023-12-03T13:19:13Z</project.build.outputTimestamp>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <fitnesse.version>20231029</fitnesse.version>
+        <fitnesse.version>20231203</fitnesse.version>
         <hsac.fixtures.version>5.3.1</hsac.fixtures.version>
     </properties>
 
