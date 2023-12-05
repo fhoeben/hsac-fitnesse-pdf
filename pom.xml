@@ -40,7 +40,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <fitnesse.version>20231203</fitnesse.version>
-        <hsac.fixtures.version>5.3.1</hsac.fixtures.version>
+        <hsac.fixtures.version>5.3.4</hsac.fixtures.version>
     </properties>
 
     <dependencies>
