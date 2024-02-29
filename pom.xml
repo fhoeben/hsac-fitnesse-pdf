@@ -4,7 +4,7 @@
 
     <groupId>nl.hsac</groupId>
     <artifactId>hsac-fitnesse-pdf</artifactId>
-    <version>0.1.4-SNAPSHOT</version>
+    <version>0.1.4</version>
     <url>https://github.com/fhoeben/hsac-fitnesse-pdf</url>
     <name>Fixtures to work with PDFs in FitNesse</name>
     <description>Fixtures to work with PDFs in FitNesse</description>
@@ -36,11 +36,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputTimestamp>2023-12-03T13:19:13Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2023-12-05T16:20:33Z</project.build.outputTimestamp>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <fitnesse.version>20231203</fitnesse.version>
-        <hsac.fixtures.version>5.3.6</hsac.fixtures.version>
+        <hsac.fixtures.version>5.3.4</hsac.fixtures.version>
     </properties>
 
     <dependencies>
@@ -81,7 +81,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <release>11</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
