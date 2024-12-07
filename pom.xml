@@ -4,7 +4,7 @@
 
     <groupId>nl.hsac</groupId>
     <artifactId>hsac-fitnesse-pdf</artifactId>
-    <version>0.1.6-SNAPSHOT</version>
+    <version>0.1.6</version>
     <url>https://github.com/fhoeben/hsac-fitnesse-pdf</url>
     <name>Fixtures to work with PDFs in FitNesse</name>
     <description>Fixtures to work with PDFs in FitNesse</description>
@@ -36,7 +36,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputTimestamp>2024-12-07T16:12:48Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2024-12-07T16:53:21Z</project.build.outputTimestamp>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <fitnesse.version>20241207</fitnesse.version>
