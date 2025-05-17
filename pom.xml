@@ -4,7 +4,7 @@
 
     <groupId>nl.hsac</groupId>
     <artifactId>hsac-fitnesse-pdf</artifactId>
-    <version>0.1.7-SNAPSHOT</version>
+    <version>0.1.8-SNAPSHOT</version>
     <url>https://github.com/fhoeben/hsac-fitnesse-pdf</url>
     <name>Fixtures to work with PDFs in FitNesse</name>
     <description>Fixtures to work with PDFs in FitNesse</description>
